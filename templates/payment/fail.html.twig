@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Order - Food menu app {% endblock %}
+
+{% block body %}
+    <h2>Cancellation of your order</h2>
+    <p>
+        hello {{order.user.firstname}} {{order.user.lastname}}, <br>
+        Your payment for order no. <b>{{order.reference}}</b> did not succeed.<br>
+    </p>
+    <hr>
+    <a class="btn btn-outline-success" href="{{ path('order') }}">Try again</a>
+{% endblock %}

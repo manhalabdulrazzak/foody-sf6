@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Orders - Menu Food App {% endblock %}
+
+{% block body %}
+    <h2>See my orders</h2>
+    {% if orders %}
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">Items</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">passed on </th>
+                    <th scope="col">Reference</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{order.totalQuantity}}</td>
+                        <td>{{
+                            order.state == 1 ? 'Payment accepted' :
+                            order.state == 2 ? 'In preparation' : 'Delivery'
+                        }}</td>
+                        <td>{{((order.carrierPrice + order.total) / 100)|number_format(3,',','.') }} KWD</td>
+                        <td>{{order.createdAt|date('d/m/Y')}}</td>
+                        <td><span class="badge badge-secondary">{{order.reference}}</span></td>
+                        <td><a href="{{ path('account_order', {'reference' : order.reference}) }}">Consulter Order</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You have not placed any orders yet.</p>
+    {% endif %}
+    <a title="Back to your members area"href="{{ path('account') }}">Return to my account</a>
+{% endblock %}
