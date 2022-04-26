@@ -38,6 +38,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
+            ->setFaviconPath(path:'public/assets/ico.png' )
             ->setTitle('Food App');
 
     }
@@ -48,7 +49,7 @@ class DashboardController extends AbstractDashboardController
 
 
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToRoute('View website', 'fas fa-globe', ' home');
+        yield MenuItem::linkToRoute('View website', 'fas fa-globe', 'home');
 
         yield MenuItem::section('Products');
 
@@ -70,8 +71,8 @@ class DashboardController extends AbstractDashboardController
         ]);
         yield MenuItem::section('Users');
         yield MenuItem::subMenu('User', 'fas fa-users')->setSubItems([
-            MenuItem::linkToCrud('Create User', 'fas fa-plus', Category::class)->setAction(Crud::PAGE_NEW),
-            MenuItem::linkToCrud('Show User', 'fas fa-eye', Category::class)
+            MenuItem::linkToCrud('Create User', 'fas fa-plus', User::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Show User', 'fas fa-eye', User::class)
         ]);
         yield MenuItem::linkToCrud('Kitchen', 'fas fa-utensils', Carrier::class);
         yield MenuItem::linkToCrud('Headers', 'fas fa-desktop', Headers::class);
